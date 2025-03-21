@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="image/favicon.ico">
+    <title>Anh <3 Em</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fae1dd;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+		.marquee-text {
+            position: absolute;
+            width: 100%;
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+            white-space: nowrap;
+            overflow: hidden;
+            display: none;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        .marquee2 { top: 50px; animation: marquee 30s linear infinite  }
+        .marquee3 { top: 150px; animation: marquee 40s linear infinite; }
+        .marquee4 { top: 250px; animation: marquee 50s linear infinite reverse; }
+        .marquee5 { top: 350px; animation: marquee 60s linear infinite reverse; }
+
+        .heart-container {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            color: red;
+            cursor: pointer;
+            transition: transform 2s ease-in-out;
+        }
+
+        .fall {
+            transform: translateY(100vh);
+        }
+
+        .falling-heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            position: relative;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .valentines {
+            position: relative;
+            top: 20px;
+            animation: up 3s linear infinite;
+        }
+
+        @keyframes up {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .envelope {
+            position: relative;
+            width: 210px;  /* Giảm kích thước */
+    height: 150px;
+            background-color: #f08080;
+        }
+
+        .envelope:before {
+            content: "";
+            position: absolute;
+            width: 178px;  /* Điều chỉnh chiều rộng */
+    height: 160px; /* Điều chỉnh chiều cao */
+    top: -75px;    /* Điều chỉnh vị trí lên/xuống */
+    left: 30px;    /* Điều chỉnh vị trí trái/phải */
+    border-radius: 20px 0 0 0; /* Bo góc nhẹ hơn */
+            background-color: #f08080;
+            transform: rotate(45deg);
+        }
+
+        .front {
+            position: absolute;
+             border-right: 148px solid #f4978e; /* Giảm chiều rộng nắp */
+    border-top: 80px solid transparent; /* Giảm chiều cao */
+    border-bottom: 80px solid transparent; /* Giảm chiều cao */
+    left: 90px; /* Điều chỉnh vị trí */
+            top: 5px;
+            width: 0;
+            height: 0;
+            z-index: 10;
+        }
+
+        .front:before {
+            position: absolute;
+            content: "";
+            border-left: 240px solid #f8ad9d; /* Thu nhỏ chiều rộng */
+    border-top: 165px solid transparent; /* Giảm chiều cao */
+    left: -90px;
+    top: -85px;
+            width: 0;
+            height: 0;
+        }
+
+        .card {
+            position: absolute;
+            background-color: #eae2b7;
+             width: 200px;  /* Giảm kích thước */
+    height: 130px;
+            top: 5px;
+            left: 15px;
+            box-shadow: -5px -5px 100px rgba(0,0,0,0.4);
+            transition: top 1s ease-in-out;
+            opacity: 1;
+        }
+
+        .card:before {
+            content: "";
+            position: absolute;
+            border: 3px solid #003049;
+            border-style: dotted;
+            width: 170px;
+            height: 100px;
+            left: 12px;
+            top: 12px;
+        }
+
+        .text {
+    position: absolute;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 16px; /* Giảm kích thước chữ */
+    line-height: px;
+    text-align: center;
+    line-height: 30px;
+    color: #003049;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+        .heart {
+    background-color: #d62828;
+    display: inline-block;
+    height: 16px; /* Giảm kích thước */
+    width: 16px;  /* Giảm kích thước */
+    position: relative;
+    top: 110px;  /* Đẩy xuống thấp hơn */
+    left: 115px; /* Căn chỉnh lại cho đều */
+     left: 50%; /* Căn giữa theo chiều ngang */
+    transform: translateX(-50%) rotate(-45deg); /* Dịch trái tim về giữa */
+}
+
+        .shadow {
+            position: absolute;
+            width: 250px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.3);
+            top: 200px;
+            left: -5px;
+            animation: scale 3s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes scale {
+            0%, 100% { transform: scaleX(1); }
+            50% { transform: scaleX(0.85); }
+        }
+
+        .heart:before, .heart:after {
+    content: "";
+    background-color: #d62828;
+    border-radius: 50%;
+    height: 16px; /* Giảm kích thước */
+    width: 16px;  /* Giảm kích thước */
+    position: absolute;
+}
+
+.heart:before { top: -10px; left: 0; }
+.heart:after { left: 10px; top: 0; }
+
+        .moving-text {
+            position: absolute;
+            top: 230px;
+            left: 55%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: bold;
+            color: red;
+            white-space: nowrap;
+            overflow: hidden;
+			white-space: pre-line;
+			text-align: center; /* Canh giữa nếu muốn */
+			width: 120%; /* Giới hạn chiều rộng */
+			max-width: 400px; /* Tránh quá lớn */
+			white-space: pre-line; /* Hiển thị xuống dòng đúng */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart-container" id="mainHeart">❤️</div>
+
+    <audio id="bg-music" loop preload="auto">
+        <source src="I Do.mp3" type="audio/mpeg">
+    </audio>
+
+<div class="marquee-text marquee2">1:4:2023 Lúc anh đang khá suy sụp thì nhiên em đến 😞🥹</div>
+<div class="marquee-text marquee3">	Lúc đó anh thật sự như được an ủi, cảm ơn vì lúc đó đã đến bên anh 😳💖</div>
+<div class="marquee-text marquee4">Nhìn lại những ngày đi thực tập anh đã thật vô tâm, đã làm em tổn thương rồi 😞</div>
+<div class="marquee-text marquee5">Mỗi ngày bên em là một ngày tuyệt vời! 💖</div>
+    <div class="container">
+        <div class="valentines">
+            <div class="envelope"></div>
+            <div class="front"></div>
+            <div class="card">
+                <div class="text">GỬI EM</br>CHIẾC KIM NGƯU </br>CỨNG ĐẦU</div>
+                <div class="heart"></div>
+            </div>
+        </div>
+        <div class="shadow"></div>
+        <div class="moving-text"></div>
+    </div>
+
+    <script>
+        const mainHeart = document.getElementById("mainHeart");
+        const container = document.querySelector(".container");
+        const card = document.querySelector(".card");
+        const movingText = document.querySelector(".moving-text");
+        let clickCount = 0;
+		const textContent = "Anh không giỏi trong văn vở lắm,EQ cũng không hẳn là cao chẳng phải người tinh tế gì,\nvậy mà vẫn cố đâm đầu vào em bị ngốc à. ❤️";
+        let index = 0;
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("falling-heart");
+            heart.innerHTML = "&#10084;";
+            document.body.appendChild(heart);
+
+            const size = Math.random() * 20 + 10;
+            heart.style.fontSize = size + "px";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        function startFallingHearts() {
+            setInterval(createHeart, 300);
+        }
+
+        function showTextByLetter() {
+            if (index < textContent.length) {
+                movingText.textContent += textContent[index];
+                index++;
+                setTimeout(showTextByLetter, 50);
+            }
+        }
+
+        document.body.addEventListener('click', function () {
+            let audio = document.getElementById("bg-music");
+            audio.play();
+
+            if (clickCount === 0) {
+                mainHeart.classList.add("fall");
+                setTimeout(() => {
+                    mainHeart.style.display = "none";
+                    container.style.display = "block";
+                    setTimeout(() => {
+                        container.style.opacity = "1";
+                        startFallingHearts();
+                    }, 100);
+                }, 2000);
+            } else if (clickCount === 1) {
+                card.style.top = '-90px';
+			 document.querySelectorAll(".marquee-text").forEach(mq => {
+                    mq.style.display = "block";
+                });
+                setTimeout(showTextByLetter, 1000);
+            }
+            clickCount++;
+        });
+    </script>
+
+</body>
+</html>
